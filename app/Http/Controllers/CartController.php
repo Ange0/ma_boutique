@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -13,7 +15,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        //
+        return view('cart.index');
     }
 
     /**
@@ -34,7 +36,23 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        
+        $duplicata = Cart::search(function($cartProduct, $rowId) use ($request) {
+            
+            return $cartProduct->id === (int) $request->product_id;
+        });
+  
+        if ($duplicata->isNotEmpty()) {
+            
+            return redirect()->route('home')->with('success', 'Produit a déjà été ajouté au panier');
+        }
+        
+        $product = Product::find($request->product_id);
+        
+        Cart::add($product->id, $product->name, $request->qty, $product->price)->associate('App\Models\Product');
+
+        return redirect()->route('home')->with('success', 'Produit a  été ajouté au panier');
+
     }
 
     /**
@@ -71,14 +89,10 @@ class CartController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    public function destroy($rowId)
+    {  
+        Cart::remove($rowId);
+         return back();
+       
     }
 }

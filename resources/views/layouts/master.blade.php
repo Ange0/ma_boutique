@@ -471,46 +471,41 @@
                             <div class="mini-cart mini-cart--1">
                                 <a class="mini-cart__dropdown-toggle" id="cartDropdown">
                                     <i class="fa fa-shopping-bag mini-cart__icon"></i>
-                                    <sub class="mini-cart__count">0</sub>
+                                    <sub class="mini-cart__count">{{ Cart::count() }}</sub>
                                 </a>
                                 <div class="mini-cart__dropdown-menu">
-                                    <div class="mini-cart__content">
-                                        <div class="mini-cart__item">
-                                            <div class="mini-cart__item--single">
-                                                <div class="mini-cart__item--image">
-                                                    <img src="/assets/img/products/electronics-4-150x167.jpg" alt="product">
-                                                </div>
-                                                <div class="mini-cart__item--content">
-                                                    <h4><a href="single-product.html">Odio tortor consequat</a> </h4>
-                                                    <p>Qty: 1</p>
-                                                    <p>&dollar;100.00</p>
-                                                </div>
-                                                <a class="mini-cart__item--remove" href="#"><i class="fa fa-times"></i></a>
+                                    @if(Cart::count() > 0)
+                                        <div class="mini-cart__content">
+                                            <div class="mini-cart__item">
+                                                @foreach (Cart::content() as $product)
+                                                    <div class="mini-cart__item--single">
+                                                        <div class="mini-cart__item--image">
+                                                            <img src="{{ $product->model->image }}" alt="product">
+                                                        </div>
+                                                        <div class="mini-cart__item--content">
+                                                            <h4><a href="{{ route('cart.index') }}">Odio tortor consequat</a> </h4>
+                                                            <p>{{ $product->qty }}</p>
+                                                            <p>&dollar;{{ $product->model->getFomatterPrice() }}</p>
+                                                        </div>
+                                                        <a class="mini-cart__item--remove" href="#"><i class="fa fa-times"></i></a>
+                                                    </div>
+                                                @endforeach
                                             </div>
-                                            <div class="mini-cart__item--single">
-                                                <div class="mini-cart__item--image">
-                                                    <img src="/assets/img/products/furniture-6-150x167.jpg" alt="product">
-                                                </div>
-                                                <div class="mini-cart__item--content">
-                                                    <h4><a href="single-product.html">Integer eget augue</a> </h4>
-                                                    <p>Qty: 1</p>
-                                                    <p>&dollar;100.00</p>
-                                                </div>
-                                                <a class="mini-cart__item--remove" href="#"><i class="fa fa-times"></i></a>
+                                            <div class="mini-cart__total">
+                                                <h4>
+                                                    <span class="mini-cart__total--title">Subtotal</span>
+                                                    <span class="mini-cart__total--ammount">$0.00</span>
+                                                </h4>
                                             </div>
+                                            <div class="mini-cart__btn">
+                                                <a href="{{ route('cart.index') }}" class="btn btn-small btn-icon btn-style-1 color-1">Voir le panier <i class="fa fa-angle-right"></i></a>
+                                                <a href="checkout.html" class="btn btn-small btn-icon btn-style-1 color-1">Finaliser <i class="fa fa-angle-right"></i></a>
+                                            </div>
+                                            
                                         </div>
-                                        <div class="mini-cart__total">
-                                            <h4>
-                                                <span class="mini-cart__total--title">Subtotal</span>
-                                                <span class="mini-cart__total--ammount">$0.00</span>
-                                            </h4>
-                                        </div>
-                                        <div class="mini-cart__btn">
-                                            <a href="cart.html" class="btn btn-small btn-icon btn-style-1 color-1">View Cart <i class="fa fa-angle-right"></i></a>
-                                            <a href="checkout.html" class="btn btn-small btn-icon btn-style-1 color-1">Checkout <i class="fa fa-angle-right"></i></a>
-                                        </div>
-                                        
-                                    </div>
+                                    @else
+                                    <p style="color: #fb9935;" class="text-center">Votre panier est vide.</p>
+                                    @endif
                                 </div>
                             </div>
                             <!-- Header Cart End -->
@@ -726,7 +721,11 @@
             </div>
         </div>
         <!-- Breadcumb area End -->
-
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
         <!-- Main Wrapper Start -->
         @yield('content')
         <!-- Main Wrapper End -->

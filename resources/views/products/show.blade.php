@@ -91,18 +91,16 @@
                                     <i class="fa fa-check-circle"></i>
                                     200 In Stock
                                 </p> 
-                                <div class="product-action-wrapper">
+                                <form action="{{ route('cart.store') }}" method="POST">
+                                    @csrf
+                                    <div class="product-action-wrapper">
                                     <div class="quantity">
                                         <input type="number" class="quantity-input" name="qty" id="qty1" value="1" min="1">
                                     </div> 
-                                    <form action="{{ route('cart.store') }}" method="POST">
-                                        @csrf
-                                        <input type="hidden" name="id" value="{{ $product->id }}">
-                                        <input type="hidden" name="name" value="{{ $product->name }}">
-                                        <input type="hidden" name="price" value="{{ $product->price}}">
+                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
                                         <button type="submit" class="btn add-to-cart btn-style-1 color-1">Ajouter au panier</button>
-                                    </form>
-                                </div>  
+                                    </div> 
+                                </form> 
                                 <div class="single-product__btn">
                                     <a href="wishlist.html" data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><i class="fa fa-heart-o"></i> Add to Wishlist</a>
                                     <a href="compare.html" data-toggle="tooltip" data-placement="top" title="Add to Compare"><i class="fa fa-refresh"></i> Add to Compare</a>
