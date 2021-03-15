@@ -23,7 +23,7 @@ class ProductsTableSeeder extends Seeder
                 'slug' =>  $faker->slug,
                 'subtitle' => $faker->sentence(10),
                 'description' => $faker->text,
-                'price' => $faker->numberBetween(10, 300) * 100,
+                'price' => $faker->numberBetween(1000, 100000),
                 'image' => 'https://via.placeholder.com/250'
 
             ]);

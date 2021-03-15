@@ -13,9 +13,9 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function item()
     {
-        return view('cart.index');
+        return view('cart.item');
     }
 
     /**
@@ -49,9 +49,10 @@ class CartController extends Controller
         
         $product = Product::find($request->product_id);
         
-        Cart::add($product->id, $product->name, $request->qty, $product->price)->associate('App\Models\Product');
+        
+        Cart::add($product->id, $product->name, (int) $request->qty, $product->price)->associate('App\Models\Product');
 
-        return redirect()->route('home')->with('success', 'Produit a  été ajouté au panier');
+        return redirect()->route('cart.index')->with('success', 'Produit a  été ajouté au panier');
 
     }
 
@@ -89,10 +90,4 @@ class CartController extends Controller
         //
     }
 
-    public function destroy($rowId)
-    {  
-        Cart::remove($rowId);
-         return back();
-       
-    }
 }

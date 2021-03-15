@@ -20,12 +20,12 @@ Route::get('/', function () {
 })->name('home');
 
 /** Products route  */
-Route::get('/produits', [ProductController::class, 'index'])->name('products.index');
+Route::get('/produits', [ProductController::class, 'item'])->name('products.item');
 Route::get('/produit/{slug}', [ProductController::class, 'show'])->name('products.show');
 
 /** Cart route  */
 Route::post('/panier/ajouter', [CartController::class, 'store'])->name('cart.store');
-Route::get('/mon-panier', [CartController::class, 'index'])->name('cart.index');
+Route::get('/mon-panier', [CartController::class, 'item'])->name('cart.item');
 /* Route::get('/vide-panier', [CartController::class, 'destroy'])->name('cart.destroy'); */
 Route::delete('/panier/{rowId}', [CartController::class, 'destroy'])->name('cart.destroy');
 

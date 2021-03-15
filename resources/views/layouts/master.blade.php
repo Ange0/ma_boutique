@@ -28,6 +28,7 @@
 
     <!-- style css -->
     <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/custom.css">
 
     <!-- modernizr JS
     ============================================ -->
@@ -37,6 +38,7 @@
     <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    @livewireStyles
 </head>
 
 <body>
@@ -468,46 +470,7 @@
                         </div>
                         <div class="col-lg-1 col-md-2 align-self-start">
                             <!-- Header Cart Start -->
-                            <div class="mini-cart mini-cart--1">
-                                <a class="mini-cart__dropdown-toggle" id="cartDropdown">
-                                    <i class="fa fa-shopping-bag mini-cart__icon"></i>
-                                    <sub class="mini-cart__count">{{ Cart::count() }}</sub>
-                                </a>
-                                <div class="mini-cart__dropdown-menu">
-                                    @if(Cart::count() > 0)
-                                        <div class="mini-cart__content">
-                                            <div class="mini-cart__item">
-                                                @foreach (Cart::content() as $product)
-                                                    <div class="mini-cart__item--single">
-                                                        <div class="mini-cart__item--image">
-                                                            <img src="{{ $product->model->image }}" alt="product">
-                                                        </div>
-                                                        <div class="mini-cart__item--content">
-                                                            <h4><a href="{{ route('cart.index') }}">Odio tortor consequat</a> </h4>
-                                                            <p>{{ $product->qty }}</p>
-                                                            <p>&dollar;{{ $product->model->getFomatterPrice() }}</p>
-                                                        </div>
-                                                        <a class="mini-cart__item--remove" href="#"><i class="fa fa-times"></i></a>
-                                                    </div>
-                                                @endforeach
-                                            </div>
-                                            <div class="mini-cart__total">
-                                                <h4>
-                                                    <span class="mini-cart__total--title">Subtotal</span>
-                                                    <span class="mini-cart__total--ammount">$0.00</span>
-                                                </h4>
-                                            </div>
-                                            <div class="mini-cart__btn">
-                                                <a href="{{ route('cart.index') }}" class="btn btn-small btn-icon btn-style-1 color-1">Voir le panier <i class="fa fa-angle-right"></i></a>
-                                                <a href="checkout.html" class="btn btn-small btn-icon btn-style-1 color-1">Finaliser <i class="fa fa-angle-right"></i></a>
-                                            </div>
-                                            
-                                        </div>
-                                    @else
-                                    <p style="color: #fb9935;" class="text-center">Votre panier est vide.</p>
-                                    @endif
-                                </div>
-                            </div>
+                            @livewire('cart.mini-item')
                             <!-- Header Cart End -->
                         </div>
                     </div>
@@ -721,11 +684,7 @@
             </div>
         </div>
         <!-- Breadcumb area End -->
-        @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
+       
         <!-- Main Wrapper Start -->
         @yield('content')
         <!-- Main Wrapper End -->
@@ -1076,6 +1035,8 @@
 
     <!-- Main JS -->
     <script src="/assets/js/main.js"></script>
+
+    @livewireScripts
 
 </body>
 

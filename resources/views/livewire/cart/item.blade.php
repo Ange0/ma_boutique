@@ -1,5 +1,11 @@
-@extends('layouts.master')
-@section('content')
+<div>
+   <div class="container">
+        @if (session('success'))
+        <div class="alert alert-success text-center">
+            {{ session('success') }}
+        </div>
+        @endif
+   </div>
 @if (Cart::count() > 0)
 <div class="main-content-wrapper">
     <div class="cart-area pt--40 pb--80 pt-sm--30 pb-sm--60">
@@ -23,36 +29,33 @@
                                 </thead>
                                 <tbody>
                                     @foreach (Cart::content() as $product)
-                                        <tr>
-                                            <td>
-                                                <form action="{{ route('cart.destroy', $product->rowId) }}" method="POST">
-                                                    @method('DELETE')
-                                                    @csrf
-                                                    <button type="submit"><i class="fa fa-trash"></i></button>
-                                                </form>
-                                            </td>
-                                            <td>
-                                                <a href="single-product.html">
-                                                    <img src="{{ $product->model->image }}" alt="product">
-                                                </a>
-                                            </td>
-                                            <td class="wide-column">
-                                                <h3><a href="single-product.html">{{ $product->model->name }}</a></h3>
-                                            </td>
-                                            <td class="cart-product-price"><strong>{{ $product->model->getFomatterPrice() }}</strong></td>
-                                            <td>
-                                                <div class="quantity">
-                                                    <input type="number" class="quantity-input" name="qty" id="qty{{ $product->id }}" value="{{ $product->qty }}" min="1">
-                                                </div>
-                                            </td>
-                                            <td class="cart-product-price"><strong>$28.00</strong></td>
-                                        </tr>
-                                    @endforeach
+                                    <tr>
+                                        <td>
+                                             <button class="button-out" wire:click="$emit('destroy', '{{ $product->rowId }}')"><i class="fa fa-trash"></i></button>
+                                        </td>
+                                        <td>
+                                            <a href="single-product.html">
+                                                <img src="{{ $product->model->image }}" alt="product">
+                                            </a>
+                                        </td>
+                                        <td class="wide-column">
+                                            <h3><a href="single-product.html">{{ $product->model->name }}</a></h3>
+                                        </td>
+                                        <td class="cart-product-price"><strong>{{ getFomatterPrice($product->model->price) }} Fcfa</strong></td>
+                                        <td>
+                                            <div class="quantity">
+                                                
+                                                <input type="number" class="quantity-input" wire:model="qty"  id="qty{{ $product->id }}" min="1">
+                                            </div>
+                                        </td>
+                                        <td class="cart-product-price"><strong> {{ getFomatterPrice($product->model->price *  $product->qty) }} Fcfa</strong></td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
 
-                        <div class="row pb--30">
+                        {{-- <div class="row pb--30">
                             <div class="col-12">
                                 <div class="apply-coupon-wrapper">
                                     <div class="form__group d-flex justify-content-between flex-sm-row flex-column">
@@ -66,7 +69,7 @@
                                     <a href="shop.html" class="btn btn-5 btn-style-1 color-1">Update Cart</a>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <!-- Cart Area End --> 
                     </div>
                 </div>
@@ -80,14 +83,14 @@
                                 <table class="table">
                                     <tbody>
                                         <tr class="cart-subtotal">
-                                            <th>Subtotal</th>
-                                            <td><span class="price-ammount">$140.00</span></td>
+                                            <th>Sous-total</th>
+                                            <td><span class="price-ammount">{{(Cart::subtotal()) }} FCFA</span></td>
                                         </tr>
                                         <tr class="shipping">
-                                            <th>Subtotal</th>
+                                            <th>TAX</th>
                                             <td>
-                                                Flat Rate: <span class="price-ammount">$5.00</span>
-                                                <a href="#" class="expand-calculator">Calculate Shipping</a>
+                                                Invoirienne: <span class="price-ammount">{{ Cart::tax() }} FCFA</span>
+                                               {{--  <a href="#" class="expand-calculator">Calculate Shipping</a>
                                                 <form action="#" id="shipping-calculator" class="form shipping-form hide-in-default">
                                                     <select name="shipping_country" id="shipping_country" class="form__input form__input--2">
                                                         <option value="">Select a country…</option>
@@ -141,17 +144,17 @@
                                                     <input type="text" name="shipping_state" id="shipping_state" class="form__input form__input--2" placeholder="State / Country">
                                                     <input type="text" name="shipping_zip" id="shipping_zip" class="form__input form__input--2" placeholder="Postcode / Zip">
                                                     <button type="submit" class="btn btn-5 btn-style-1 color-1">Update Totals</button>
-                                                </form>
+                                                </form> --}}
                                             </td>
                                         </tr>
                                         <tr class="cart-total">
                                             <th>TOTAL</th>
-                                            <td><span class="price-ammount">$145.00</span></td>
+                                            <td><span class="price-ammount">{{ Cart::total() }} FCFA</span></td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
-                            <a href="checkout.html" class="btn btn-6 btn-style-2">Proceed to Checkout</a>
+                            <a href="checkout.html" class="btn btn-6 btn-style-2">Passer à la caisse</a>
                         </div>
                     </div>
                 </div>
@@ -163,7 +166,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <div class="alert alert-warning">
+            <div class="alert alert-warning text-center">
                 Votre panier est vide !
             </div>
         </div>
@@ -171,4 +174,5 @@
 </div>
 @endif
 
-@endsection
+
+</div>
