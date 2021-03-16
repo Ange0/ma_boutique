@@ -89,7 +89,7 @@
                                         <tr class="shipping">
                                             <th>TVA</th>
                                             <td>
-                                                Invoirienne: <span class="price-ammount">{{ getFomatterPrice(Cart::tax())  }} FCFA</span>
+                                                18%: <span class="price-ammount">{{ getFomatterPrice(Cart::tax())  }} FCFA</span>
                                                {{--  <a href="#" class="expand-calculator">Calculate Shipping</a>
                                                 <form action="#" id="shipping-calculator" class="form shipping-form hide-in-default">
                                                     <select name="shipping_country" id="shipping_country" class="form__input form__input--2">

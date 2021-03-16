@@ -524,9 +524,10 @@
                             window.location.href = redirect;
 
                         }).catch((error)=>{
+                             button.disabled = false;
+
                             console.log(error);
                         });
-                        button.disabled = false;
                        // console.log(result.paymentIntent);
                     }
                 }
