@@ -24,7 +24,7 @@
             <div class="mini-cart__total">
                 <h4>
                     <span class="mini-cart__total--title">Sous-Total</span>
-                    <span class="mini-cart__total--ammount">{{ Cart::subtotal() }} FCFA</span>
+                    <span class="mini-cart__total--ammount">{{ getFomatterPrice(Cart::subtotal()) }} FCFA</span>
                 </h4>
             </div>
             <div class="mini-cart__btn">

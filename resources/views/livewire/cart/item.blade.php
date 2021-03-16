@@ -87,7 +87,7 @@
                                             <td><span class="price-ammount">{{ getFomatterPrice(Cart::subtotal()) }} FCFA</span></td>
                                         </tr>
                                         <tr class="shipping">
-                                            <th>TAX</th>
+                                            <th>TVA</th>
                                             <td>
                                                 Invoirienne: <span class="price-ammount">{{ getFomatterPrice(Cart::tax())  }} FCFA</span>
                                                {{--  <a href="#" class="expand-calculator">Calculate Shipping</a>
