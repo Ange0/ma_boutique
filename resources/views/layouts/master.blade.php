@@ -39,6 +39,7 @@
     <![endif]-->
 
     @livewireStyles
+    @yield('extra-script')
 </head>
 
 <body>
@@ -1037,7 +1038,8 @@
     <script src="/assets/js/main.js"></script>
 
     @livewireScripts
-
+    
+    @yield('extra-js')
 </body>
 
 

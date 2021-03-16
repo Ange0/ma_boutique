@@ -29,7 +29,7 @@
             </div>
             <div class="mini-cart__btn">
                 <a href="{{ route('cart.item') }}" class="btn btn-small btn-icon btn-style-1 color-1">Voir le panier <i class="fa fa-angle-right"></i></a>
-                <a href="checkout.html" class="btn btn-small btn-icon btn-style-1 color-1">Finaliser <i class="fa fa-angle-right"></i></a>
+                <a href="{{ route('checkout.index')}}" class="btn btn-small btn-icon btn-style-1 color-1">Finaliser <i class="fa fa-angle-right"></i></a>
             </div>
             
         </div>

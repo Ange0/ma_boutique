@@ -84,12 +84,12 @@
                                     <tbody>
                                         <tr class="cart-subtotal">
                                             <th>Sous-total</th>
-                                            <td><span class="price-ammount">{{(Cart::subtotal()) }} FCFA</span></td>
+                                            <td><span class="price-ammount">{{ getFomatterPrice(Cart::subtotal()) }} FCFA</span></td>
                                         </tr>
                                         <tr class="shipping">
                                             <th>TAX</th>
                                             <td>
-                                                Invoirienne: <span class="price-ammount">{{ Cart::tax() }} FCFA</span>
+                                                Invoirienne: <span class="price-ammount">{{ getFomatterPrice(Cart::tax())  }} FCFA</span>
                                                {{--  <a href="#" class="expand-calculator">Calculate Shipping</a>
                                                 <form action="#" id="shipping-calculator" class="form shipping-form hide-in-default">
                                                     <select name="shipping_country" id="shipping_country" class="form__input form__input--2">
@@ -149,12 +149,12 @@
                                         </tr>
                                         <tr class="cart-total">
                                             <th>TOTAL</th>
-                                            <td><span class="price-ammount">{{ Cart::total() }} FCFA</span></td>
+                                            <td><span class="price-ammount">{{ getFomatterPrice( Cart::total()) }} FCFA</span></td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
-                            <a href="checkout.html" class="btn btn-6 btn-style-2">Passer à la caisse</a>
+                            <a href="{{ route('checkout.index')}}" class="btn btn-6 btn-style-2">Passer à la caisse</a>
                         </div>
                     </div>
                 </div>
