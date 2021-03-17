@@ -40,12 +40,16 @@ class CheckOutController extends Controller
     $data = $request->json()->all();
 
     $products = [];
+
     $i = 0;
+    
     foreach (Cart::content() as $product) {
+
       $products['product_' . $i]['name'] = $product->model->name;
       $products['product_' . $i]['price'] = $product->model->price;
       $products['product_' . $i]['qty'] = $product->qty;
       $i++;
+
     }
 
     $order = new Order();
@@ -60,6 +64,7 @@ class CheckOutController extends Controller
 
       Cart::destroy();
       session()->flash('success', 'Félicitation Votre commande à été traitée avec  succès ');
+
       return response()->json(['success', 'Paiement validé avec succès']);
 
     } else {

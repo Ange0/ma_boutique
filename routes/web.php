@@ -28,6 +28,7 @@ Route::get('/produit/{slug}', [ProductController::class, 'show'])->name('product
 Route::post('/panier/ajouter', [CartController::class, 'store'])->name('cart.store');
 Route::get('/mon-panier', [CartController::class, 'item'])->name('cart.item');
 /* Route::get('/vide-panier', [CartController::class, 'destroy'])->name('cart.destroy'); */
+Route::post('panier/{rowId}', [CartController::class, 'update'])->name('cart.update');
 Route::delete('/panier/{rowId}', [CartController::class, 'destroy'])->name('cart.destroy');
 
 /** Checkout route  */

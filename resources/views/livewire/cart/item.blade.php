@@ -5,6 +5,11 @@
             {{ session('success') }}
         </div>
         @endif
+        @if (session('error'))
+        <div class="alert alert-danger text-center">
+            {{ session('error') }}
+        </div>
+        @endif
    </div>
 @if (Cart::count() > 0)
 <div class="main-content-wrapper">
@@ -43,9 +48,15 @@
                                         </td>
                                         <td class="cart-product-price"><strong>{{ getFomatterPrice($product->model->price) }} Fcfa</strong></td>
                                         <td>
-                                            <div class="quantity">
+                                            <div class="">
                                                 
-                                                <input type="number" class="quantity-input" wire:model="qty"  id="qty{{ $product->id }}" min="1">
+                                                <select data-id="{{ $product->rowId }}" name="qty" id="select-qty" class="form-control custom-select">
+                                                    @for($i = 1; $i <= 6; $i++)
+                                                    
+                                                        <option value="{{ $i }}" {{ $i === (int ) $product->qty ? "selected" :"" }}> {{ $i }}</option>
+                                                    @endfor
+                                                </select>
+                                               {{--  <input type="number" class="quantity-input" wire:model="qty"  id="qty{{ $product->id }}" min="1"> --}}
                                             </div>
                                         </td>
                                         <td class="cart-product-price"><strong> {{ getFomatterPrice($product->model->price *  $product->qty) }} Fcfa</strong></td>
@@ -173,6 +184,4 @@
     </div>
 </div>
 @endif
-
-
 </div>
