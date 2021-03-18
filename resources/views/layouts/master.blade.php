@@ -340,96 +340,18 @@
                                 <h2 class="category-nav__title primary-bg" id="js-cat-nav-title"><i class="fa fa-bars"></i> <span>Categories</span></h2>
 
                                 <ul class="category-nav__menu hide-in-default" id="js-cat-nav">
-                                    <li class="category-nav__menu__item has-children">
-                                        <a href="shop.html"><i class="fa fa-coffee"></i> Fashion</a>
-                                        <div class="category-nav__submenu">
+                                   @foreach (App\Models\Category::all() as $category)
+                                    <li class="category-nav__menu__item {{-- has-children --}}">
+                                        <a href="{{ route('products.item', ['categorie' => $category->slug ]) }}"><i class="fa fa-coffee"></i>{{ $category->name }}</a>
+                                    {{--  <div class="category-nav__submenu">
                                             <div class="category-nav__submenu--inner">
                                                 <ul>
                                                     <li><a href="shop.html">Health &amp; Beauties</a></li>
                                                 </ul>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </li>
-                                    <li class="category-nav__menu__item has-children">
-                                        <a href="shop.html"><i class="fa fa-lightbulb-o"></i> Electronics</a>
-                                        <div class="category-nav__submenu mega-menu three-column">
-                                            <div class="category-nav__submenu--inner">
-                                                <h3 class="category-nav__submenu__title">Television</h3>
-                                                <ul>
-                                                    <li><a href="shop.html">LED TV</a></li>
-                                                    <li><a href="shop.html">LCD TV</a></li>
-                                                    <li><a href="shop.html">Curved TV</a></li>
-                                                    <li><a href="shop.html">Plasma TV</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="category-nav__submenu--inner">
-                                                <h3 class="category-nav__submenu__title">Refrigerator</h3>
-                                                <ul>
-                                                    <li><a href="shop.html">LG</a></li>
-                                                    <li><a href="shop.html">Samsung</a></li>
-                                                    <li><a href="shop.html">Toshiba</a></li>
-                                                    <li><a href="shop.html">Panasonic</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="category-nav__submenu--inner">
-                                                <h3 class="category-nav__submenu__title">Air Conditioners</h3>
-                                                <ul>
-                                                    <li><a href="shop.html">Samsung</a></li>
-                                                    <li><a href="shop.html">Panasonic</a></li>
-                                                    <li><a href="shop.html">Sanaky</a></li>
-                                                    <li><a href="shop.html">Toshiba</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="category-nav__menu__item">
-                                        <a href="shop.html"><i class="fa fa-tree"></i> Baby</a>
-                                    </li>
-                                    <li class="category-nav__menu__item has-children">
-                                        <a href="shop.html"><i class="fa fa-mobile"></i> Mobile</a>
-                                        <div class="category-nav__submenu">
-                                            <div class="category-nav__submenu--inner">
-                                                <ul>
-                                                    <li><a href="shop.html">Apple</a></li>
-                                                    <li><a href="shop.html">Samsung</a></li>
-                                                    <li><a href="shop.html">Nokia</a></li>
-                                                    <li><a href="shop.html">Walton</a></li>
-                                                    <li><a href="shop.html">Sony</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="category-nav__menu__item">
-                                        <a href="shop.html"><i class="fa fa-shield"></i> Furniture</a>
-                                        <div class="category-nav__submenu">
-                                            <div class="category-nav__submenu--inner">
-                                                <ul>
-                                                    <li><a href="shop.html">Apple</a></li>
-                                                    <li><a href="shop.html">Samsung</a></li>
-                                                    <li><a href="shop.html">LG</a></li>
-                                                    <li><a href="shop.html">Sony</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="category-nav__menu__item">
-                                        <a href="shop.html"><i class="fa fa-plane"></i> Sport</a>
-                                    </li>
-                                    <li class="category-nav__menu__item">
-                                        <a href="shop.html"><i class="fa fa-gift"></i> Gift, Parties</a>
-                                    </li>
-                                    <li class="category-nav__menu__item">
-                                        <a href="shop.html"><i class="fa fa-cog"></i> Accessories</a>
-                                    </li>
-                                    <li class="category-nav__menu__item hidden-lg-menu-item">
-                                        <a href="shop.html"><i class="fa fa-tv"></i> Toshiba</a>
-                                    </li>
-                                    <li class="category-nav__menu__item hidden-lg-menu-item">
-                                        <a href="shop.html"><i class="fa fa-tv"></i> Samsung</a>
-                                    </li>
-                                    <li class="category-nav__menu__item hidden-menu-item">
-                                        <a href="shop.html"><i class="fa fa-cube"></i> Jewlery &amp; watches</a>
-                                    </li>
+                                   @endforeach
                                     <li class="category-nav__menu__item">
                                         <a href="shop.html" class="js-expand-hidden-menu"> More Categories</a>
                                     </li>

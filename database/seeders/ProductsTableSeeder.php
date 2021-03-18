@@ -26,6 +26,9 @@ class ProductsTableSeeder extends Seeder
                 'price' => $faker->numberBetween(1000, 100000),
                 'image' => 'https://via.placeholder.com/250'
 
+            ])->categories()->attach([
+                rand(1, 4),
+                rand(1, 4)
             ]);
        }
     }

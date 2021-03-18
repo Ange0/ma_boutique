@@ -36,19 +36,8 @@
                         <div class="tab-content" id="myTabContent-2">
                             <div class="tab-pane show active" id="grid">
                                 <div class="product-grid-view three-column">
-                                    @livewire('products.item', ['products' => $products])
-                                    <div class="row no-gutters">
-                                        <div class="col-12">
-                                            <ul class="pagination">
-                                                <li class="prev"><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
-                                                <li><a href="#">1</a></li>
-                                                <li class="current"><a href="#">2</a></li>
-                                                <li><a href="#">3</a></li>
-                                                <li><a href="#">4</a></li>
-                                                <li class="next"><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
+                                    @livewire('products.item')
+                                    
                                 </div>
                             </div>
                             

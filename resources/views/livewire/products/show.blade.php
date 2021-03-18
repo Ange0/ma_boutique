@@ -109,14 +109,28 @@
                                 <div class="single-product__meta">
                                     <p>
                                         <strong>Categories:</strong> 
-                                        <a href="shop.html">Accessories,</a>
-                                        <a href="shop.html">Electronics</a>
+                                          @foreach ($product->categories as $category)
+                                            <a href="shop.html">
+                                                {{ $category->name }} 
+
+                                                @if (! $loop->last) 
+                                                    ,
+                                                @endif
+                                            </a>
+                                          @endforeach
                                     </p>
-                                    <p>
+                                   {{--  <p>
                                         <strong>Tags:</strong> 
-                                        <a href="shop.html">cloths,</a>
-                                        <a href="shop.html">Fashion</a>
-                                    </p>
+                                        @foreach ($product->tags as $tag)
+                                        <a href="shop.html">
+                                            {{ $tag->name }} 
+
+                                            @if (! $loop->last) 
+                                                ,
+                                            @endif
+                                        </a>
+                                      @endforeach
+                                    </p> --}}
                                 </div>   
                                 <div class="social-buttons">
                                     <a href="facebook.com" class="facebook social-button">

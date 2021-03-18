@@ -470,23 +470,61 @@ button {
     -o-border-radius: 5px;
     border-radius: 5px;
     display: inline-block; }
+    .pagination li button {
+      width: 4rem;
+      height: 4rem;
+      line-height:1.8rem;
+      text-align: center;
+      border: 1px solid #e5e5e5;
+      color: #333333;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      -ms-border-radius: 5px;
+      -o-border-radius: 5px;
+      border-radius: 5px;
+      display: inline-block; }
     @media (max-width: 35.94em) {
       .pagination li a {
         width: 3.5rem;
         height: 3.5rem;
         line-height: 3.3rem;
-        text-align: center; } }
+        text-align: center; }
+        .pagination li button {
+          width: 3.5rem;
+          height: 3.5rem;
+          line-height: 3.3rem;
+          text-align: center; } }
     .pagination li a:hover {
       background: #40576c;
       color: #fff !important; }
+      .pagination li button:hover {
+        background: #40576c;
+        color: #fff !important; }
       .pagination li a:hover i {
         color: #fff !important; }
+        .pagination li button:hover i {
+          color: #fff !important; }
   .pagination li.current a {
     background: #40576c;
     color: #fff !important; }
+    .pagination li.current span {
+      line-height:3.8rem;
+      width: 4rem;
+      height: 4rem;
+      text-align: center;
+      border: 1px solid #e5e5e5;
+      color: #e5e5e5;
+      background:#40576c;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      -ms-border-radius: 5px;
+      -o-border-radius: 5px;
+      border-radius: 5px;
+      display: inline-block; }
     .pagination li.current a i {
       color: #fff !important; }
-
+      .pagination li.current span i {
+        color: #fff !important; }
 .gallery-row {
   margin-right: -10px;
   margin-left: -10px; }

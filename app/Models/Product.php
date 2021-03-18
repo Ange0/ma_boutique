@@ -9,10 +9,14 @@ class Product extends Model
 {
     use HasFactory;
 
-    public function getFomatterPrice()
+    public function categories ()
     {
-        $price =$this->price / 100;
-
-        return number_format($price, 2, ',', ' '). ' €';
+        return $this->belongsToMany(Category::class);
     }
+
+    public function tags ()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
 }

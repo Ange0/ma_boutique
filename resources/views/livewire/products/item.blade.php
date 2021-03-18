@@ -28,7 +28,7 @@
                 </div>
                 <div class="product-box__price">
                    {{--  <span class="regular-price">$100.00</span> --}}
-                    <span class="sale-price">{{ $product->price }} Fcfa</span>
+                    <span class="sale-price">{{ $product->price }} {{ config('cart.currency.fcfa') }}</span>
                 </div>
             </div>
             <div class="product-box__action action-2">
@@ -40,5 +40,10 @@
         </div>
     </div>
     @endforeach
+</div>
+<div class="row no-gutters">
+    <div class="col-12">
+        {{ $products->links()}}
+    </div>
 </div>
 </div>
