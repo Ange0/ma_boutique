@@ -12,8 +12,9 @@
     <div class="col-md-4 col-sm-6">
         <div class="product-box product-box-hover-down bg--white color-1">
             <div class="product-box__img">
-                <img src="{{ $product->image }}" alt="{{ $product->name }}" class="primary-image">
-                <img src="{{ $product->image }}" alt="{{ $product->name }}" class="secondary-image">
+                
+                <img src="{{ asset('storage/'. $product->image) }}" alt="{{ $product->name }}" class="primary-image">
+                <img src="{{ asset('storage/'. $product->image) }}" alt="{{ $product->name }}" class="secondary-image">
                 {{-- <a href="#" data-toggle="modal" data-target="#productModal" class="product-box__quick-view"><i class="fa fa-search"></i></a> --}}
                 <a href="{{ route('products.show', $product->slug) }}"  class="product-box__quick-view"><i class="fa fa-search"></i></a>
             </div>

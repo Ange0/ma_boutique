@@ -49,17 +49,18 @@ class Item extends Component
    }
     public function render()
     {
+       //request()->input('categorie')
         if (request()->categorie) {
 
             $products =  Product::with('categories')->whereHas('categories', function($query) {
 
                 $query->where('slug', request()->categorie);
 
-            })->paginate($this->paginate);
+            })->latest()->paginate($this->paginate);
 
         }else{
 
-            $products = Product::with('categories')->paginate($this->paginate);
+            $products = Product::with('categories')->latest()->paginate($this->paginate);
         }
        
         return view('livewire.products.item', ['products' => $products]);

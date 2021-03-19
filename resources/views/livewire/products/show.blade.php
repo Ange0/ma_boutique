@@ -10,7 +10,7 @@
                             <div class="tab-content product-thumb-large" id="myTabContent-3">
                                 <div class="tab-pane fade show active" id="product-large-one">
                                     <div class="single-product__img easyzoom">
-                                        <img src="{{ $product->image }}" alt="product">
+                                        <img src="{{ asset('storage/'.$product->image) }}" alt="product">
                                         <a class="popup-btn" href="/assets/img/products/furniture-13.jpg"><i class="fa fa-search-plus"></i>Large Image</a>
                                     </div>
                                 </div>
@@ -85,7 +85,7 @@
     
                                 <div class="single-product__middle">
                                     <p class="single-product__short-desc">
-                                        {{ $product->description }}
+                                        {!! $product->description !!}
                                     <p class="product-availability">
                                         <i class="fa fa-check-circle"></i>
                                         200 In Stock
