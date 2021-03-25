@@ -6,6 +6,7 @@ use App\Models\Order;
 use DateTime;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Stripe\PaymentIntent;
 use Stripe\Stripe;
 
@@ -57,7 +58,7 @@ class CheckOutController extends Controller
     $order->amount = $data['paymentIntent']['amount'];
     $order->payment_created_at = (new DateTime())->setTimestamp($data['paymentIntent']['created'])->format('Y-m-d H:i:s');
     $order->products = serialize($products);
-    $order->user_id = 1;
+    $order->user_id = Auth::user()->id;
     $order->save();
 
     if ($data['paymentIntent']['status'] === "succeeded") {

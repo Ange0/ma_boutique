@@ -65,14 +65,27 @@
                             <div class="header-top__nav header-top__nav--1 d-flex justify-content-lg-end justify-content-center">
                                 <div class="user-info header-top__nav--item">
                                     <div class="dropdown header-top__dropdown">
+                                       @guest
+                                            <a class="dropdown-toggle" id="userID" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Mon Compte
+                                            </a>
+                                            <div class="dropdown-menu" aria-labelledby="userID">
+                                                <a class="dropdown-item" href="#">Mon Compte</a>
+                                                <a class="dropdown-item" href="#">S'inscrire</a>
+                                                <a class="dropdown-item" href="{{ route('login') }}">Se connecter</a>
+                                            </div>
+                                        @else
                                         <a class="dropdown-toggle" id="userID" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            My Account
+                                            {{ Auth::user()->email}}
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="userID">
-                                            <a class="dropdown-item" href="#">My Account</a>
-                                            <a class="dropdown-item" href="#">Checkout</a>
-                                            <a class="dropdown-item" href="#">Sign In</a>
+                                            <a class="dropdown-item" href="{{ route('dashboard') }}">Mes commandes</a>
+                                            <form class="dropdown-item" action="{{ route('logout') }}" method="POST">
+                                                @csrf
+                                                <button class="button-out">Se deconnecter</button>
+                                            </form>
                                         </div>
+                                       @endguest
                                     </div>
                                 </div>
                                 <div class="currency-selector header-top__nav--item">
@@ -290,7 +303,7 @@
                         </div>
                         <div class="col-xl-4 col-lg-5">
                             <!-- Search Form Start -->
-                            <form action="#" class="search-form search-form--1">
+                            <form action="{{ route('products.search') }}" class="search-form search-form--1">
                                 <div class="search-form__group search-form__group--select">
                                     <select name="category" id="searchCategory" class="search-form__select">
                                         <option value="all">All Categories</option>
@@ -314,7 +327,7 @@
                                         <option value="3">Sport</option>
                                     </select>
                                 </div>
-                                <input type="text" class="search-form__input" placeholder="Enter your search...">
+                                <input type="text" class="search-form__input" value="{{ request()->input('q') ?? '' }}" name='q' placeholder="Entrer votre recherche...">
                                 <button class="search-form__submit hover-scheme-2">
                                     <i class="fa fa-search"></i>
                                 </button>
@@ -607,7 +620,20 @@
             </div>
         </div>
         <!-- Breadcumb area End -->
-       
+       <div class="container">
+        @if (request()->input('q'))
+        <h1>{{ $products->total()}} résultat(s) pour la rechercher "{{ request()->input('q') }}"</h1>
+    @endif
+    @if (count($errors)  > 0)
+    <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+       </div>
         <!-- Main Wrapper Start -->
         @yield('content')
         <!-- Main Wrapper End -->

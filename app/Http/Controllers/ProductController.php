@@ -18,4 +18,17 @@ class ProductController extends Controller
         
         return view('products.show')->with('product', $product);
     }
+
+    public function search(Request $request)
+    {   
+     request()->validate([
+        'q' => 'required|min:3'
+     ]);
+      $q = $request->input('q');
+      $productsSearch =  Product::where("name", "like", "%$q%")
+            ->orWhere("description", "like", "%$q%")
+            ->paginate(6);
+      return view('products.search', ["products" => $productsSearch ]);
+    }
+
 }
