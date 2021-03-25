@@ -10,7 +10,7 @@
                             <div class="tab-content product-thumb-large" id="myTabContent-3">
                                 <div class="tab-pane fade show active" id="product-large-one">
                                     <div class="single-product__img easyzoom">
-                                        <img src="{{ asset('storage/'.$product->image) }}" alt="product">
+                                        <img src="{{ '/storage/'.$product->image }}" alt="product">
                                         <a class="popup-btn" href="/assets/img/products/furniture-13.jpg"><i class="fa fa-search-plus"></i>Large Image</a>
                                     </div>
                                 </div>
@@ -38,26 +38,15 @@
                             <!-- Product Thumbnail Carousel Start -->
                             <div class="product-thumbnail">
                                 <div class="thumb-menu product-thumb-menu" id="thumbmenu-horizontal">
-                                    <div class="thumb-menu-item">
-                                        <a href="#product-large-one" data-toggle="tab" class="nav-link active">
-                                            <img src="/assets/img/products/furniture-13-250x278.jpg" alt="product thumb">
-                                        </a>
-                                    </div>
-                                    <div class="thumb-menu-item">
-                                        <a href="#product-large-two" data-toggle="tab" class="nav-link">
-                                            <img src="/assets/img/products/furniture-14-250x278.jpg" alt="product thumb">
-                                        </a>
-                                    </div>
-                                    <div class="thumb-menu-item">
-                                        <a href="#product-large-three" data-toggle="tab" class="nav-link">
-                                            <img src="/assets/img/products/furniture-15-250x278.jpg" alt="product thumb">
-                                        </a>
-                                    </div>
-                                    <div class="thumb-menu-item">
-                                        <a href="#product-large-four" data-toggle="tab" class="nav-link">
-                                            <img src="/assets/img/products/furniture-16-250x278.jpg" alt="product thumb">
-                                        </a>
-                                    </div>
+                                    @if($product->images)
+                                        @foreach (json_decode($product->images) as $image)
+                                            <div class="thumb-menu-item">
+                                                <a href="#product-large-one" data-toggle="tab" class="nav-link active">
+                                                    <img src="{{ '/storage/'.$image}}" alt="product thumb">
+                                                </a>
+                                            </div>
+                                        @endforeach
+                                    @endif
                                 </div>
                             </div>
                             <!-- Product Thumbnail Carousel End -->
