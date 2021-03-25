@@ -3,17 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Product;
+use App\Traits\VerificationStock;
 use DateTime;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Stripe\PaymentIntent;
 use Stripe\Stripe;
 
 class CheckOutController extends Controller
 {
+  use VerificationStock;
   public function index()
   {
+   
     try {
       if (Cart::count() <= 0) {
         return redirect()->route('home');
@@ -35,15 +40,18 @@ class CheckOutController extends Controller
 
     return  view('checkout.index', ['client_secret' => $intent->client_secret]);
   }
+  
 
   public function store(Request $request)
   {
+    if ($this->checkIfQtyNotAvailable()) {
+      Session::flash('error', 'Un produit de votre panier n\'est plus disponible' );
+      return response()->json(['success' => false], 400);
+    }
+
     $data = $request->json()->all();
-
     $products = [];
-
     $i = 0;
-    
     foreach (Cart::content() as $product) {
 
       $products['product_' . $i]['name'] = $product->model->name;
@@ -63,6 +71,8 @@ class CheckOutController extends Controller
 
     if ($data['paymentIntent']['status'] === "succeeded") {
 
+      $this->updateStock();
+
       Cart::destroy();
       session()->flash('success', 'Félicitation Votre commande à été traitée avec  succès ');
 
@@ -78,5 +88,16 @@ class CheckOutController extends Controller
   public function thankYou()
   {
     return session()->has('success') ? view('checkout.thank-you') : redirect()->route('home');
+  }
+
+  private function updateStock()
+  {
+   
+    foreach(Cart::content() as $item)
+    {
+      $product = Product::find($item->model->id);
+      $product->update(['stock' => $product->stock - $item->qty]);
+      
+    }
   }
 }

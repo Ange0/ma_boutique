@@ -76,19 +76,26 @@
                                     <p class="single-product__short-desc">
                                         {!! $product->description !!}
                                     <p class="product-availability">
-                                        <i class="fa fa-check-circle"></i>
-                                        200 In Stock
+                                        @if($isStock)
+                                            <i class="fa fa-check-circle"></i>
+                                            {{ $product->stock }} en stock.
+                                        @else
+                                            <i class="fa fa-ban" style="color:red" aria-hidden="true"></i>
+                                            indisponible
+                                        @endif
                                     </p> 
-                                    <form action="{{ route('cart.store') }}" method="POST">
-                                        @csrf
-                                        <div class="product-action-wrapper">
-                                        <div class="quantity">
-                                            <input type="number" class="quantity-input" name="qty" id="qty1" value="1" min="1">
-                                        </div> 
-                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                            <button type="submit" class="btn add-to-cart btn-style-1 color-1">Ajouter au panier</button>
-                                        </div> 
-                                    </form> 
+                                    @if($isStock)
+                                        <form action="{{ route('cart.store') }}" method="POST">
+                                            @csrf
+                                            <div class="product-action-wrapper">
+                                            <div class="quantity">
+                                                <input type="number" class="quantity-input" name="qty" id="qty1" value="1" min="1">
+                                            </div> 
+                                                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                                <button type="submit" class="btn add-to-cart btn-style-1 color-1">Ajouter au panier</button>
+                                            </div> 
+                                        </form> 
+                                    @endif
                                     <div class="single-product__btn">
                                         <a href="wishlist.html" data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><i class="fa fa-heart-o"></i> Add to Wishlist</a>
                                         <a href="compare.html" data-toggle="tooltip" data-placement="top" title="Add to Compare"><i class="fa fa-refresh"></i> Add to Compare</a>

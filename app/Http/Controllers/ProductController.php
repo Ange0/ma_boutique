@@ -15,8 +15,10 @@ class ProductController extends Controller
     public function show($slug)
     {   
         $product = Product::where('slug', $slug)->firstOrFail();
-        
-        return view('products.show')->with('product', $product);
+
+        $isStock = $product->stock != 0 ? true : false;
+
+        return view('products.show', compact('product','isStock'));
     }
 
     public function search(Request $request)

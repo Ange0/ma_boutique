@@ -96,10 +96,13 @@ class CartController extends Controller
 
         if ($validator->fails()) {
             session()->flash('error', 'Quantité incorrecte ' .$data['qty']);
-
             return response()->json(['error' => 'Quantité incorrecte']);
         }
+        if ($data['qty'] > $data['stock']) {
 
+            session()->flash('error', 'La quantitée '.$data['qty'].' de ce produit n\'est pas disponible ');
+            return response()->json(['error' => 'Quantité indisponible']);
+        }
         Cart::update($rowId, $data['qty']);
 
         session()->flash('success', 'La quantité est passée à ' .$data['qty']);

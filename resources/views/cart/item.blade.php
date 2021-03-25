@@ -17,6 +17,7 @@
             element.addEventListener('change', function () {
                 var $token = $('meta[name="csrf-token"]').attr('content');
                 var rowId = this.getAttribute('data-id');
+                var stock = this.getAttribute('data-stock');
                 fetch(
                     `/panier/${rowId}`,
                     { 
@@ -28,8 +29,9 @@
                                 },
                         method: 'post',
 
-                        body: JSON.stringify({
-                            qty: this.value
+                        body: JSON.stringify({ 
+                            qty: this.value,
+                            stock: stock
                         })
                     }
                 ).then((data) => {

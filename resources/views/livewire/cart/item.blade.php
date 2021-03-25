@@ -50,7 +50,7 @@
                                         <td>
                                             <div class="">
                                                 
-                                                <select data-id="{{ $product->rowId }}" name="qty" id="select-qty" class="form-control custom-select">
+                                                <select data-id="{{ $product->rowId }}" data-stock="{{ $product->model->stock }}" name="qty" id="select-qty" class="form-control custom-select">
                                                     @for($i = 1; $i <= 6; $i++)
                                                     
                                                         <option value="{{ $i }}" {{ $i === (int ) $product->qty ? "selected" :"" }}> {{ $i }}</option>

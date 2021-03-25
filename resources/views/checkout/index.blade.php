@@ -502,7 +502,7 @@
                         var paymentIntent = result.paymentIntent;;
                         var $token = $('meta[name="csrf-token"]').attr('content');
                         var url = form.action;
-                        var redirect = '/merci';
+                       
 
                         fetch(
                             url,
@@ -519,9 +519,14 @@
                                 })
                             }
                         ).then((data)=> {
-
-                            console.log(data);
-                            window.location.href = redirect;
+                           
+                            if (data.status === 400) {
+                                window.location.href = '/mon-panier';
+                            }else{
+                                console.log(data);
+                                window.location.href = '/merci';
+                            }
+                           
 
                         }).catch((error)=>{
                              button.disabled = false;
